@@ -1,0 +1,136 @@
+<template>
+    <div id="app">
+        <div class="row1">
+            <div>
+                <img src="../assets/jibei.jpg" alt="">
+            </div>
+            <div>
+                <span>热情的学习者</span>
+                <span>普通的开发者</span>
+                <span>贫穷的数码迷</span>
+            </div>
+        </div>
+        <div class="row2">
+            <span>极北</span>
+            <span>Coder & Developer</span>
+            <span><i class="fa fa-map-marker"></i>江苏·南京</span>
+            <a href="https://github.com/zrc1708" target="_blank">GitHub</a>
+        </div>
+        <div class="row3">
+            <div><span>79</span><span>文章</span></div>
+            <div><span>43</span><span>标签</span></div>
+        </div>
+    </div>
+</template>
+<script>
+export default {
+    
+}
+</script>
+<style lang="less" scoped>
+    #app{
+        width: 100%;
+        height: 380px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow:0px 2px 15px 4px #eeeeee;
+        display: flex;
+        flex-direction: column;
+        padding-top: 35px;
+        font: #565a5f;
+        .row1{
+            display: flex;
+            div:nth-child(1){
+                flex: 1;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+                img{
+                    display: block;
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 5px;
+                    box-shadow:0px 2px 6px 4px #f5f5f5;
+                }
+            }
+            div:nth-child(2){
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                span{
+                    display: block;
+                    color: #808080ad;
+                    font-size: 13px;
+                    margin: 5px 0;
+                }
+            }
+        }
+        .row2{
+            span{
+                display: block;
+                text-align: center;
+                margin: 3px;
+            }
+            span:nth-child(1){
+                padding-top: 15px;
+                font-size: 30px;
+                font-weight: bold;
+            }
+            span:nth-child(3){
+                i{
+                    margin-right: 5px;
+                }
+                color: #9a9ea3;
+                padding-bottom: 20px;
+            }
+            a{
+                display: block;
+                width: 50%;
+                height: 40px;
+                margin: 0 auto;
+                background-color: #38b7ea;
+                text-align: center;
+                line-height: 40px;
+                font-size: 20px;
+                text-decoration: none;
+                color:inherit;
+                color: white;
+                border-radius: 10px;
+                transition: all .4s;
+                &:hover{
+                    background-color: #78c6e6;
+                }
+            }
+        }
+        .row3{
+            display: flex;
+            height: 100%;
+            margin-top: 20px;
+            div{
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                border-top: 1px solid #eeeeee;
+                span:nth-child(1){
+                    font-size: 30px;
+                    display: block;
+                    text-align: center;
+                }
+                span:nth-child(2){
+                    font-size: 17px;
+                    display: block;
+                    text-align: center;
+                }
+            }
+            div:nth-child(2){
+                border-left: 1px solid #eeeeee;
+            }
+        }
+    }
+    
+</style>
