@@ -35,7 +35,7 @@ export default {
            text-decoration: none;
            color:inherit;
            font-size: 16px;
-           padding: 0 20px;
+           padding-right: 20px;
            color: #38b7ea;
            &:hover{
                color: #78c6e6;

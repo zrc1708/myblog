@@ -1,23 +1,32 @@
 <template>
     <div id="app">
-       <div class="article" @click="readArticle">封装一个自定义组件</div>
+       <div class="article" @click="readArticle">{{article.title}}</div>
        <ul>
-            <li><i class="fa fa-calendar"></i>2020-9-9</li>
-            <li><i class="fa fa-folder"></i>技术框架</li>
-            <li><i class="fa fa-tag"></i>单例模式</li>
+            <li><i class="fa fa-calendar"></i>{{article.date.split('T')[0]}}</li>
+            <li><i class="fa fa-folder"></i>{{article.sortname}}</li>
+            <li><i class="fa fa-tag"></i>{{article.labelname}}</li>
             <!--清除浮动样式-->
             <div style="clear:both;"></div>
        </ul>
        <div class="detail">
-            别再去做那些假电商项目了，来看看这个吧。
+            {{article.detail}}
        </div>
     </div>
 </template>
 <script>
 export default {
+    props: ['article'],
+    data() {
+        return {
+            
+        }
+    },
+    mounted() {
+        // console.log(this.article);
+    },
     methods: {
         readArticle(){
-            this.$store.commit('setArticleId',Math.random())
+            this.$store.commit('setArticleId',this.article.mdname)
         }
     },
 }

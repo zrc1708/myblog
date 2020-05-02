@@ -6,11 +6,9 @@
                 <span>jibei·极北</span>
             </a>
             <ul>
-                <li>主页</li>
+                <li @click="move('/articlelist')">主页</li>
                 <li>归档</li>
-                <li>知识星球</li>
-                <li>捐赠录</li>
-                <li>关于我</li>
+                <li @click="move('/readarticle?articleid=me.md')">关于我</li>
                 <!--清除浮动样式-->
                 <div style="clear:both;"></div>
             </ul>
@@ -19,7 +17,17 @@
 </template>
 <script>
 export default {
-    
+    methods: {
+        move(url){
+            let data=window.location.href;
+            let name=data.split("/#")[1];
+            if(name===url)  return
+
+            this.$router.push({
+                path:url,
+            })
+        }
+    },
 }
 </script>
 <style lang="less" scoped>

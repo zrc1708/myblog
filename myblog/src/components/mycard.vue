@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" ref="app">
         <div class="row1">
             <div>
                 <img src="../assets/jibei.jpg" alt="">
@@ -23,6 +23,9 @@
     </div>
 </template>
 <script>
+let item = document.querySelector('#app')
+
+
 export default {
     
 }

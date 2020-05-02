@@ -2,10 +2,9 @@
   <div id="app">
     <my-header></my-header>
 
-
     <div class="content">
       <div class="leftbar">
-        <my-card></my-card>
+        <my-card ></my-card>
       </div>
 
       <div class="content_article">
@@ -30,9 +29,24 @@ import mycloud from '../src/components/cloud.vue'
 export default {
   data() {
     return {
-      article:['1','1','1','1','1','1']
     }
   },
+  // mounted() {
+  //       this.leftBarTop = this.$refs.mycard.getBoundingClientRect().top
+  //       window.addEventListener("scroll", this.handleScroll);
+  // },
+  // methods: {
+  //       handleScroll() {
+  //           console.log(this.leftBarTop);
+  //           if(this.$refs.mycard.getBoundingClientRect().top<=0){
+  //             let width = this.$refs.mycard.getBoundingClientRect().width
+  //               this.$refs.mycard.style.position = 'fixed'
+  //               // this.$refs.mycard.style.top = this.leftBarTop+'px'
+  //               this.$refs.mycard.style.width = width +'px'
+  //               this.$refs.content.style.marginLeft = width +'px'
+  //           }
+  //       },
+  // },
   components:{
     'my-header':header,
     'my-card':mycard,
@@ -61,17 +75,18 @@ export default {
       margin: 0 auto;
       padding-top: 30px;
         .leftbar{
-          width: 20%;
+          flex: 2;
         }
         .content_article{
           display: flex;
           flex-direction: column;
           padding: 0 20px;
-          width: 60%;
+          flex: 6;
         }
         .sidebar{
-          width: 20%;
+          flex: 2;
         }
     } 
+    
   }
 </style>

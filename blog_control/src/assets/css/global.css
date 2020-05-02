@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    height: 100%;
+}
+body{
+    background-color: #f5f8f9;
+}
+input{
+    margin-bottom: 20px!important;
+}

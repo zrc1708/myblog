@@ -1,27 +1,43 @@
 <template>
     <div id="app">
-        {{articleId}}
+        <div class="markdown-body" v-html="html" v-highlight></div>
     </div>
 </template>
 <script>
+import showdown from 'showdown'
+
+
 export default {
     data() {
         return {
-            articleId:''
+            html:'',
         }
     },
     created() {
         let data=window.location.href;
         let id=data.split("?articleid=")[1];
-        this.articleId = id
+        this.getmd(decodeURIComponent(id))
+    },
+    methods: {
+        async getmd(mdurl){
+            let converter = new showdown.Converter();
+            let data = await this.$http.get(`static/${mdurl}`)
+            this.html = converter.makeHtml(data.data);
+        }
     },
 }
 </script>
+
 <style lang="less" scoped>
+@import "../assets/css/md.css";
     #app{
         width: 100%;
         background-color: white;
         border-radius: 10px;
+        box-sizing: border-box;
         box-shadow:0px 2px 6px 4px #f5f5f5;
+        padding: 20px;
+        padding-left: 40px;
+        
     }
 </style>
