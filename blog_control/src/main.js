@@ -5,8 +5,18 @@ import store from './store'
 
 import '../src/assets/css/global.css'
 
-Vue.config.productionTip = false
+// 导入axios
+import axios from 'axios'
+//配置请求根路径
+axios.defaults.baseURL = 'http://127.0.0.1:8877/'
+Vue.prototype.$http = axios
 
+axios.interceptors.request.use(config=>{
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+
+Vue.config.productionTip = false
 
 new Vue({
   router,

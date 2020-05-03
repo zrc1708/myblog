@@ -8,6 +8,10 @@ html,body{
 body{
     background-color: #f5f8f9;
 }
-input{
-    margin-bottom: 20px!important;
+.el-form-item{
+    margin-bottom: 20px;
+}
+/* 修改弹出框样式 */
+.el-dialog{
+    min-width: 500px;
 }
