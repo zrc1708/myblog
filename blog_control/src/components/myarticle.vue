@@ -31,13 +31,13 @@
                     <el-input v-model="newDate" :disabled="true" class="changeInput"></el-input>
                 </el-form-item>
                 <el-form-item label="文章分类：">
-                    <el-select v-model="changed.sortname" placeholder="请选择活动区域">
+                    <el-select v-model="changed.sortname" placeholder="请选择分类">
                         <el-option v-for="(item, index) in sortList" :key="index" 
                         :label="item.sortname" :value="item.sortid"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="文章标签：">
-                    <el-select v-model="changed.labelname" placeholder="请选择活动区域" >
+                    <el-select v-model="changed.labelname" placeholder="请选择标签" >
                         <el-option v-for="(item, index) in labelList" :key="index" 
                         :label="item.labelname" :value="item.labelid"></el-option>
                     </el-select>

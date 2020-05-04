@@ -3,8 +3,8 @@
        <div class="article" @click="readArticle">{{article.title}}</div>
        <ul>
             <li><i class="fa fa-calendar"></i>{{article.date.split('T')[0]}}</li>
-            <li><i class="fa fa-folder"></i>{{article.sortname}}</li>
-            <li><i class="fa fa-tag"></i>{{article.labelname}}</li>
+            <li @click="readSort(article.sortname)"><i class="fa fa-folder"></i>{{article.sortname}}</li>
+            <li @click="readLabel(article.labelname)"><i class="fa fa-tag"></i>{{article.labelname}}</li>
             <!--清除浮动样式-->
             <div style="clear:both;"></div>
        </ul>
@@ -27,6 +27,14 @@ export default {
     methods: {
         readArticle(){
             this.$store.commit('setArticleId',this.article.mdname)
+        },
+        readLabel(name){
+            this.$store.commit('setName',name)
+            this.$store.commit('setCategory','label')
+        },
+        readSort(name){
+            this.$store.commit('setName',name)
+            this.$store.commit('setCategory','sort')
         }
     },
 }

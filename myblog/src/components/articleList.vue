@@ -27,7 +27,16 @@ export default {
     },
     components:{
         'my-article':myarticle
+    },
+     watch:{
+    '$store.state.name':async function(newFlag, oldFlag){
+        let name = this.$store.state.name
+        let category = this.$store.state.category
+        let {data} = await this.$http.get(`getlist/${category}/${name}`)
+        // console.log(data);
+        this.articleList = data.arr
     }
+  }
 }
 </script>
 <style lang="less" scoped>
