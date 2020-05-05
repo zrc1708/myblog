@@ -21,7 +21,15 @@
     
     app.use(async(ctx, next)=> {
         var token = ctx.headers.authorization;
-        if (ctx.request.url==='/checkuser') {
+        if (ctx.request.url!=='/deleteArticles'||
+            ctx.request.url!=='/deleteSort'||
+            ctx.request.url!=='/changeArticle'||
+            ctx.request.url!=='/changeSort'||
+            ctx.request.url!=='/changeLabel'||
+            ctx.request.url!=='/addSort'||
+            ctx.request.url!=='/addLabel'||
+            ctx.request.url!=='/uploadfile'||
+            ctx.request.url!=='/deleteLabel') {
             return await next();
         }else if(token === 'null'){
             return ctx.body={
@@ -49,9 +57,12 @@
 
     const router = new Router();//路由
 
-    router.get('/', async ctx => {
-        ctx.type = 'html';
-        ctx.body = fs.createReadStream('./static/index.html');
+    // 获取文章
+    router.get('/readarticle/:name', async ctx => {
+        let name = ctx.params.name
+        // console.log(name);
+        ctx.type = 'md';
+        ctx.body = fs.createReadStream(`./static/${name}`);
     });
 
     const articlerouter = require('./blog.js')

@@ -57,7 +57,7 @@ export default {
   watch:{
     '$store.state.articleId':function(newFlag, oldFlag){
       let id = this.$store.state.articleId
-      console.log(id);
+      // console.log(id);
       this.$router.push({
         path:`/readarticle?articleid=${id}`,
         // query:{articleId:id}

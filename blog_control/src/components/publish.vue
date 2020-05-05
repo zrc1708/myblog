@@ -3,7 +3,7 @@
         <el-card>
             <el-button @click="choosefile()">选择md</el-button>
             <span v-if="choosedFileName">{{choosedFileName}}</span>
-            <el-button @click="upload()" :disabled="choosedFileName?false:true">上传</el-button>
+            <el-button @click="upload()" :disabled="publishit?false:true">上传</el-button>
             <input id="flieinput" type="file" accept=".md" ref="file" @change="checkField($event)">
             <!-- 文章详细内容表单 -->
             <el-form ref="form" :model="form" label-width="100px" class="articleForm">
@@ -53,6 +53,17 @@ export default {
         this.uploadArticle.datetime = this.getFormatDate()
         this.getSortList()
         this.getLabelList()
+
+    },
+    computed: {
+        publishit(){
+            let list = Object.values(this.uploadArticle)
+            // 只要数组有空就返回false
+            let res = list.every(function(item,index,arr){
+                  return item!=='';
+             });
+            return res&&this.choosedFileName
+        }
     },
     methods: {
         // 选择上传的文件
@@ -67,7 +78,6 @@ export default {
         },
         // 上传文章
         upload() {
-            console.log(this.uploadArticle);
             let formData = new FormData();
             formData.append('title', this.uploadArticle.title);
             formData.append('detail', this.uploadArticle.detail);
@@ -78,9 +88,17 @@ export default {
             this.$http.post(`uploadfile`, formData, {
                 'Content-Type': 'multipart/form-data'
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 this.$message.success('文章发布成功')
+                // 将数据置空
                 this.choosedFileName = ''
+                this.uploadArticle={
+                    title:'',
+                    detail:'',
+                    datetime:'',
+                    sortid:'',
+                    labelid:''
+                }
             })
         },
         // 获取当前时间

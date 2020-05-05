@@ -35,6 +35,9 @@ export default {
         let {data} = await this.$http.get(`getlist/${category}/${name}`)
         // console.log(data);
         this.articleList = data.arr
+    },
+    '$store.state.getarticle':async function(newFlag, oldFlag){
+        this.getArticleList()
     }
   }
 }

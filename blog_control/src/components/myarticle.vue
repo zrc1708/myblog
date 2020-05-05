@@ -16,7 +16,7 @@
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="openchange(scope.row)">修改</el-button>
-                        <el-button size="mini">删除</el-button>
+                        <el-button size="mini" @click="opendelete(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
             </el-table>
@@ -109,6 +109,26 @@ export default {
             // console.log(this.changed);
             this.$message.success('修改成功')
             this.getArticles()
+        },
+        //打开删除确认框 
+        opendelete(item){
+            this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(async () => {
+                const {data} =  await this.$http.post(`deleteArticles`,item)
+                this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                });
+                this.getArticles()
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
         }
     },
 }

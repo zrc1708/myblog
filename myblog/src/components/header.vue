@@ -21,7 +21,11 @@ export default {
         move(url){
             let data=window.location.href;
             let name=data.split("/#")[1];
-            if(name===url)  return
+            if(name===url)  {
+                // 刷新文章列表
+                this.$store.commit('setArticleList')
+                return
+            }
 
             this.$router.push({
                 path:url,

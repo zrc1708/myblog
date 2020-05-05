@@ -13,7 +13,7 @@ Vue.use(VueRouter)
   const routes = [
     {path:'/',redirect:'/login'},
     {path:'/login',component:login},
-    {path:'/home',component:home,children:[
+    {path:'/home',component:home,redirect:'/myarticle',children:[
       {path:'/myarticle',component:myarticle},
       {path:'/publish',component:publish},
       {path:'/mysort',component:mysort},

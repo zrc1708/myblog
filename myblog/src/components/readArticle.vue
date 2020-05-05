@@ -15,13 +15,13 @@ export default {
     },
     created() {
         let data=window.location.href;
-        let id=data.split("?articleid=")[1];
-        this.getmd(decodeURIComponent(id))
+        let name=data.split("?articleid=")[1];
+        this.getmd(decodeURIComponent(name))
     },
     methods: {
-        async getmd(mdurl){
+        async getmd(name){
             let converter = new showdown.Converter();
-            let data = await this.$http.get(`static/${mdurl}`)
+            let data = await this.$http.get(`/readarticle/${name}`)
             this.html = converter.makeHtml(data.data);
         }
     },

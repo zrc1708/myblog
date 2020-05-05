@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     articleId:'',
     category:'',
-    name:''
+    name:'',
+    getarticle:0,
   },
   mutations: {
     setArticleId(state,val){
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     setName(state,val){
       state.name = val
+    },
+    setArticleList(state){
+      state.getarticle++
     }
   },
   actions: {

@@ -75,6 +75,24 @@ articlerouters.get('/getAllArticles', async function (ctx) {
     };
 });
 
+// 删除文章
+articlerouters.post('/deleteArticles', async function (ctx) {
+    const id = ctx.request.body.id
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `DELETE FROM article where id = '${id}'`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        // arr:rs,
+        code:200,
+    };
+});
+
 // 通过标签/分类获取文章
 articlerouters.get('/getlist/:category/:name', async function (ctx) {
     let category = ctx.params.category
@@ -98,7 +116,7 @@ articlerouters.get('/getlist/:category/:name', async function (ctx) {
     };
 });
 
-// 获取所有的文章
+// 获取所有的分类
 articlerouters.get('/getAllSorts', async function (ctx) {
     const connection = await Mysql.createConnection(mysql_nico)
     const sql = `select * from sort`
@@ -114,10 +132,46 @@ articlerouters.get('/getAllSorts', async function (ctx) {
     };
 });
 
+// 删除分类
+articlerouters.post('/deleteSort', async function (ctx) {
+    const id = ctx.request.body.sortid
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `DELETE FROM sort where sortid = '${id}'`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        // arr:rs,
+        code:200,
+    };
+});
+
 // 获取所有的标签
 articlerouters.get('/getAllLabels', async function (ctx) {
     const connection = await Mysql.createConnection(mysql_nico)
     const sql = `select * from label`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
+// 获取分类云内容
+articlerouters.get('/getSortCloud', async function (ctx) {
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `Select b.sortname , count(a.sortid) as count
+                from article a ,sort b 
+                WHERE a.sortid = b.sortid GROUP BY a.sortid;`
     const [rs] = await connection.query(sql);
 
     connection.end(function(err){
@@ -144,6 +198,24 @@ articlerouters.get('/getLabelCloud', async function (ctx) {
 
     return ctx.body = {
         arr:rs,
+        code:200,
+    };
+});
+
+// 删除标签
+articlerouters.post('/deleteLabel', async function (ctx) {
+    const id = ctx.request.body.labelid
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `DELETE FROM label where labelid = '${id}'`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        // arr:rs,
         code:200,
     };
 });

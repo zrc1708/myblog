@@ -21,7 +21,7 @@ export default {
         async getLabels(){
             const {data} = await this.$http.get(`getLabelCloud`)
             if (data.code !== 200) return this.$message('登录后方可使用此功能')
-            console.log(data);
+            // console.log(data);
             this.labelList = data.arr
         },
         readlist(name){
