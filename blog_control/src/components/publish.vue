@@ -95,7 +95,7 @@ export default {
                 this.uploadArticle={
                     title:'',
                     detail:'',
-                    datetime:'',
+                    datetime:this.getFormatDate(),
                     sortid:'',
                     labelid:''
                 }

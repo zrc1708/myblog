@@ -7,7 +7,7 @@
             </a>
             <ul>
                 <li @click="move('/articlelist')">主页</li>
-                <li>归档</li>
+                <li @click="move('/allarticle')">归档</li>
                 <li @click="move('/readarticle?articleid=me.md')">关于我</li>
                 <!--清除浮动样式-->
                 <div style="clear:both;"></div>

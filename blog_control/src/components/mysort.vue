@@ -63,7 +63,7 @@ export default {
 
             const data2 = await this.$http.get(`getSortCloud`)
             
-            console.log(data2.data.arr);
+            // console.log(data2.data.arr);
             for(let i= 0;i<arr.length;i++){
                 for(let j=0;j<data2.data.arr.length;j++){
                     if(arr[i].sortname===data2.data.arr[j].sortname){
@@ -71,7 +71,7 @@ export default {
                     }
                 }
             }
-            console.log(arr);
+            // console.log(arr);
             this.sortList = arr
         },
         // 打开修改框

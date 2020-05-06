@@ -63,7 +63,7 @@ export default {
             let arr = data.arr
 
             const data2 = await this.$http.get(`getLabelCloud`)
-            console.log(data2.data.arr);
+            // console.log(data2.data.arr);
             for(let i= 0;i<arr.length;i++){
                 for(let j=0;j<data2.data.arr.length;j++){
                     if(arr[i].labelname===data2.data.arr[j].labelname){

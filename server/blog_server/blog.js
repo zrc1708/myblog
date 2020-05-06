@@ -6,39 +6,6 @@ const path = require('path');
 
 const articlerouters = new Router()
 
-// file日期格式转换
-function getdate(val){
-    let arr = (val+'').split(' ')
-    // [ 'Sun', 'Mar', '22', '2020', '22:48:42', 'GMT+0800', '(GMT+08:00)' ]
-    // 一月Jan,二月Feb,三月Mar,四月Apr,五月May,六月Jun,七月Jul,八月Aug,九月Sept,十月Oct,十一月Nov,十二月Dec
-    // 2020-03-22 22:24:41
-    if(arr[1]==='Jan'){
-        arr[1]='01'
-    }else if(arr[1]==='Feb'){
-        arr[1]='02'
-    }else if(arr[1]==='Mar'){
-        arr[1]='03'
-    }else if(arr[1]==='Apr'){
-        arr[1]='04'
-    }else if(arr[1]==='May'){
-        arr[1]='05'
-    }else if(arr[1]==='Jun'){
-        arr[1]='06'
-    }else if(arr[1]==='Jul'){
-        arr[1]='07'
-    }else if(arr[1]==='Aug'){
-        arr[1]='08'
-    }else if(arr[1]==='Sept'){
-        arr[1]='09'
-    }else if(arr[1]==='Oct'){
-        arr[1]='10'
-    }else if(arr[1]==='Nov'){
-        arr[1]='11'
-    }else if(arr[1]==='Dec'){
-        arr[1]='12'
-    }
-    return `${arr[3]}-${arr[1]}-${arr[2]} ${arr[4]}`
-}
 
 // 获取最近的文章列表
 articlerouters.get('/getArticles', async function (ctx) {
@@ -75,9 +42,47 @@ articlerouters.get('/getAllArticles', async function (ctx) {
     };
 });
 
+// 获取文章总量
+articlerouters.get('/getArticlesCount', async function (ctx) {
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `select count(*) from article;`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
+// 分页获取文章
+articlerouters.get('/getPagingArticles/:pageSize/:curPage', async function (ctx) {
+    let pageSize = ctx.params.pageSize  //一页多少条记录
+    let curPage = ctx.params.curPage    //当前的页数
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `select * from article a,sort b,label c
+                where a.sortid =b.sortid and a.labelid =c.labelid 
+                order by id desc limit ${(curPage-1)*pageSize},${pageSize};`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
 // 删除文章
 articlerouters.post('/deleteArticles', async function (ctx) {
     const id = ctx.request.body.id
+    const name = ctx.request.body.mdname
 
     const connection = await Mysql.createConnection(mysql_nico)
     const sql = `DELETE FROM article where id = '${id}'`
@@ -86,6 +91,12 @@ articlerouters.post('/deleteArticles', async function (ctx) {
     connection.end(function(err){
         //连接结束
     })
+
+    let filePath = path.join(__dirname+'/static/') + `${name}`;
+    // 删除文件
+    await fs.unlink(filePath.trim(), (err) => {
+        if (err) throw err;
+    });
 
     return ctx.body = {
         // arr:rs,
