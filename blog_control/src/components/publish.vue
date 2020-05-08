@@ -1,6 +1,9 @@
 <template>
-    <div>
-        <el-card>
+    <div id="app">
+        <el-card v-show="step1" class="card1" ref="card1">
+            <el-input type="textarea" :rows="lineNum" v-model="uploadArticle.detail" class="mymd"></el-input>
+        </el-card>
+        <el-card v-show="!step1">
             <el-button @click="choosefile()">选择md</el-button>
             <span v-if="choosedFileName">{{choosedFileName}}</span>
             <el-button @click="upload()" :disabled="publishit?false:true">上传</el-button>
@@ -47,6 +50,8 @@ export default {
                 },
                 sortList:[],
                 labelList:[],
+                step1:true,
+                lineNum:0
             }
         },
     created() {
@@ -54,6 +59,10 @@ export default {
         this.getSortList()
         this.getLabelList()
 
+    },
+    mounted () {
+        //为文本输入框设置高度, 一行文字大概占用22.3像素
+        this.lineNum = Math.floor(this.$refs.card1.$el.offsetHeight / 22.3)
     },
     computed: {
         publishit(){
@@ -130,6 +139,15 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+    #app{
+        height: 100%;
+    }
+    .card1{
+        height: 100%;
+    }
+    .mymd{
+        width: 50%;
+    }
     span{
         padding-left: 20px;
         padding-right: 20px;
