@@ -21,14 +21,14 @@
     
     app.use(async(ctx, next)=> {
         var token = ctx.headers.authorization;
-        if (ctx.request.url!=='/deleteArticles'||
-            ctx.request.url!=='/deleteSort'||
-            ctx.request.url!=='/changeArticle'||
-            ctx.request.url!=='/changeSort'||
-            ctx.request.url!=='/changeLabel'||
-            ctx.request.url!=='/addSort'||
-            ctx.request.url!=='/addLabel'||
-            ctx.request.url!=='/uploadfile'||
+        if (ctx.request.url!=='/deleteArticles'&&
+            ctx.request.url!=='/deleteSort'&&
+            ctx.request.url!=='/changeArticle'&&
+            ctx.request.url!=='/changeSort'&&
+            ctx.request.url!=='/changeLabel'&&
+            ctx.request.url!=='/addSort'&&
+            ctx.request.url!=='/addLabel'&&
+            ctx.request.url!=='/uploadfile'&&
             ctx.request.url!=='/deleteLabel') {
             return await next();
         }else if(token === 'null'){

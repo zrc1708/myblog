@@ -368,4 +368,19 @@ articlerouters.post('/uploadfile', async (ctx, next) => {
         };
   });
   
+  // 获取标签云内容
+articlerouters.get('/test1', async function (ctx) {
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `Select * from test where id = 1 ;`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
 module.exports = articlerouters

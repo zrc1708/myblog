@@ -22,7 +22,10 @@ export default {
         async getmd(name){
             let converter = new showdown.Converter();
             let data = await this.$http.get(`/readarticle/${name}`)
+            // let {data} = await this.$http.get(`/test1`)
+            // console.log(data.arr[0].content)
             this.html = converter.makeHtml(data.data);
+            // this.html = converter.makeHtml(data.arr[0].content);
         }
     },
 }

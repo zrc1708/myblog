@@ -91,7 +91,7 @@ export default {
                         bottom: -7px;
                         // width: 100%;
                         height: 3px;
-                        background-color: #eeeeee;
+                        background-color: #38b7ea;
                     }
                 }
         }
