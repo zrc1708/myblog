@@ -79,31 +79,6 @@ articlerouters.get('/getPagingArticles/:pageSize/:curPage', async function (ctx)
     };
 });
 
-// 删除文章
-articlerouters.post('/deleteArticles', async function (ctx) {
-    const id = ctx.request.body.id
-    const name = ctx.request.body.mdname
-
-    const connection = await Mysql.createConnection(mysql_nico)
-    const sql = `DELETE FROM article where id = '${id}'`
-    const [rs] = await connection.query(sql);
-
-    connection.end(function(err){
-        //连接结束
-    })
-
-    let filePath = path.join(__dirname+'/static/') + `${name}`;
-    // 删除文件
-    await fs.unlink(filePath.trim(), (err) => {
-        if (err) throw err;
-    });
-
-    return ctx.body = {
-        // arr:rs,
-        code:200,
-    };
-});
-
 // 通过标签/分类获取文章
 articlerouters.get('/getlist/:category/:name', async function (ctx) {
     let category = ctx.params.category
@@ -368,10 +343,12 @@ articlerouters.post('/uploadfile', async (ctx, next) => {
         };
   });
   
-  // 获取标签云内容
-articlerouters.get('/test1', async function (ctx) {
+// 获取文章
+articlerouters.get('/readarticle/:id', async function (ctx) {
+    let id = ctx.params.id
+
     const connection = await Mysql.createConnection(mysql_nico)
-    const sql = `Select * from test where id = 1 ;`
+    const sql = `Select * from article where id = ${id};`
     const [rs] = await connection.query(sql);
 
     connection.end(function(err){
@@ -383,4 +360,103 @@ articlerouters.get('/test1', async function (ctx) {
         code:200,
     };
 });
+
+// 文章发表接口
+articlerouters.post('/publisharticle', async (ctx, next) => {
+    // 测试上传路径的获取
+    let title = ctx.request.body.title
+    let detail = ctx.request.body.detail
+    let datetime = ctx.request.body.datetime
+    let sortid = ctx.request.body.sortid
+    let labelid = ctx.request.body.labelid
+    let content = ctx.request.body.content
+
+    // 将文件信息写入数据库
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `INSERT INTO article ( title, detail , date , sortid , labelid , content ) 
+                VALUES ( '${title}', '${detail}','${datetime}',${sortid} , ${labelid} ,'${content}');`
+    const [rs] = await connection.query(sql);
+ 
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        message:"上传成功！",
+        code:200,
+        };
+  });
+
+// 删除文章
+articlerouters.post('/deleteArticles', async function (ctx) {
+    const id = ctx.request.body.id
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `DELETE FROM article where id = '${id}';`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
+// 获取自我介绍
+articlerouters.get('/getme', async function (ctx) {
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `Select * from me where id = 1;`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
+// 修改自我介绍
+articlerouters.post('/updateme', async function (ctx) {
+    const content = ctx.request.body.me
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `UPDATE me SET content = '${content}' WHERE id = 1;`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
+// 修改文章内容
+articlerouters.post('/updateArticles', async function (ctx) {
+    const id = ctx.request.body.id
+    const content = ctx.request.body.content
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `UPDATE article SET content = '${content}' where id = ${id};`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
 module.exports = articlerouters

@@ -1,13 +1,16 @@
 <template>
     <div id="app">
         <el-card v-show="step1" class="card1" ref="card1">
-            <el-input type="textarea" :rows="lineNum" v-model="uploadArticle.detail" class="mymd"></el-input>
+            <div class="mymd">
+                <el-button class="btnmd" @click="next">下一步</el-button>
+                <el-input type="textarea" :rows="lineNum" v-model="uploadArticle.content"></el-input>
+            </div>
+            <div class="markdown-body" v-html="mymd" v-highlight 
+            :style="{'height':mymdheight+'px'}"></div>
         </el-card>
         <el-card v-show="!step1">
-            <el-button @click="choosefile()">选择md</el-button>
-            <span v-if="choosedFileName">{{choosedFileName}}</span>
-            <el-button @click="upload()" :disabled="publishit?false:true">上传</el-button>
-            <input id="flieinput" type="file" accept=".md" ref="file" @change="checkField($event)">
+            <el-button @click="back">上一步</el-button>
+            <el-button @click="upload()" :disabled="publishit?false:true">发表</el-button>
             <!-- 文章详细内容表单 -->
             <el-form ref="form" :model="form" label-width="100px" class="articleForm">
                 <el-form-item label="文章标题：">
@@ -36,22 +39,24 @@
     </div>
 </template>
 <script>
+import showdown from 'showdown'
+
 export default {
     data() {
             return {
-                choosedFileVisible:'',
-                choosedFileName:'',
                 uploadArticle:{
                     title:'',
                     detail:'',
                     datetime:'',
                     sortid:'',
-                    labelid:''
+                    labelid:'',
+                    content:''
                 },
                 sortList:[],
                 labelList:[],
                 step1:true,
-                lineNum:0
+                lineNum:0,
+                mymdheight:0
             }
         },
     created() {
@@ -62,7 +67,8 @@ export default {
     },
     mounted () {
         //为文本输入框设置高度, 一行文字大概占用22.3像素
-        this.lineNum = Math.floor(this.$refs.card1.$el.offsetHeight / 22.3)
+        this.lineNum = Math.floor(this.$refs.card1.$el.offsetHeight / 22)-2
+        this.mymdheight = this.$refs.card1.$el.offsetHeight-50
     },
     computed: {
         publishit(){
@@ -71,44 +77,29 @@ export default {
             let res = list.every(function(item,index,arr){
                   return item!=='';
              });
-            return res&&this.choosedFileName
+            return res
+        },
+        mymd(){
+            let converter = new showdown.Converter();
+            return converter.makeHtml(this.uploadArticle.content);
         }
     },
     methods: {
-        // 选择上传的文件
-        choosefile() {
-            let nico = this.$refs.file
-            nico.click()
-        },
-        // 监听文件上传input的改变
-        checkField(dom){
-            let arr = dom.target.value.split('\\')
-            this.choosedFileName = arr[arr.length-1]
-        },
-        // 上传文章
-        upload() {
-            let formData = new FormData();
-            formData.append('title', this.uploadArticle.title);
-            formData.append('detail', this.uploadArticle.detail);
-            formData.append('datetime', this.uploadArticle.datetime);
-            formData.append('sortid', this.uploadArticle.sortid);
-            formData.append('labelid', this.uploadArticle.labelid);
-            formData.append('file', this.$refs.file.files[0])
-            this.$http.post(`uploadfile`, formData, {
-                'Content-Type': 'multipart/form-data'
-            }).then(res => {
-                // console.log(res);
-                this.$message.success('文章发布成功')
-                // 将数据置空
-                this.choosedFileName = ''
-                this.uploadArticle={
+        // 发表文章
+        async upload() {
+            const {data} = await this.$http.post(`publisharticle`,this.uploadArticle)
+            console.log(data)
+            if (data.code !== 200) return this.$message('登录失效')
+            this.$message.success('发表成功')
+            // 置空对象
+            this.uploadArticle={
                     title:'',
                     detail:'',
                     datetime:this.getFormatDate(),
                     sortid:'',
-                    labelid:''
+                    labelid:'',
+                    content:''
                 }
-            })
         },
         // 获取当前时间
         getFormatDate() {
@@ -135,18 +126,29 @@ export default {
             const {data} = await this.$http.get(`getAllLabels`)
             this.labelList = data.arr
         },
+        // 下一步
+        next(){
+            this.step1 = false
+        },
+        // 上一步
+        back(){
+            this.step1 = true
+        }
     },
 }
 </script>
 <style lang="less" scoped>
+@import "../assets/css/md.css";
     #app{
         height: 100%;
+        overflow: hidden;
     }
+    // md实时编辑
     .card1{
         height: 100%;
     }
-    .mymd{
-        width: 50%;
+    .btnmd{
+        margin-bottom: 15px;
     }
     span{
         padding-left: 20px;

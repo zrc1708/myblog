@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         readArticle(){
-            this.$store.commit('setArticleId',this.article.mdname)
+            this.$store.commit('setArticleId',this.article.id)
         },
         readLabel(name){
             this.$store.commit('setName',name)

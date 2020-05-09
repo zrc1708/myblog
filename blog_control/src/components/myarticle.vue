@@ -20,6 +20,7 @@
                 <el-table-column label="操作">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="openchange(scope.row)">修改信息</el-button>
+                        <el-button size="mini" @click="change(scope.row)">修改文章</el-button>
                         <el-button size="mini" @click="opendelete(scope.row)">删除</el-button>
                     </template>
                 </el-table-column>
@@ -193,6 +194,10 @@ export default {
             // console.log(`当前页: ${val}`);
             this.curPage = val
             this.getArticles(this.pageSize,this.curPage)
+        },
+        // 修改文章
+        change(item){
+            this.$router.push(`/changearticle?id=${item.id}`)
         }
     },
 }

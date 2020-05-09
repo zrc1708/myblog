@@ -25,6 +25,10 @@
                         <i class="el-icon-tickets"></i>
                         <span slot="title">我的标签</span>
                     </el-menu-item>
+                    <el-menu-item index="me">
+                        <i class="el-icon-user"></i>
+                        <span slot="title">自我介绍</span>
+                    </el-menu-item>
                     </el-menu>
                 </el-aside>
                 <el-main>

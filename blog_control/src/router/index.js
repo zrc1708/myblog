@@ -7,6 +7,8 @@ import myarticle from '../components/myarticle'
 import publish from '../components/publish'
 import mysort from '../components/mysort'
 import mylabel from '../components/mylabel'
+import me from '../components/me'
+import changearticle from '../components/changearticle.vue'
 
 Vue.use(VueRouter)
 
@@ -17,7 +19,9 @@ Vue.use(VueRouter)
       {path:'/myarticle',component:myarticle},
       {path:'/publish',component:publish},
       {path:'/mysort',component:mysort},
-      {path:'/mylabel',component:mylabel}
+      {path:'/mylabel',component:mylabel},
+      {path:'/me',component:me},
+      {path:'/changearticle',component:changearticle}
     ]}
 ]
 

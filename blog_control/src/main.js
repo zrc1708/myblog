@@ -18,6 +18,16 @@ axios.interceptors.request.use(config=>{
 
 Vue.config.productionTip = false
 
+import '../src/assets/css/atom-one-dark.css'
+
+// 代码高亮
+Vue.directive('highlight',function (el) {
+  let blocks = el.querySelectorAll('pre code');
+  blocks.forEach((block)=>{
+    hljs.highlightBlock(block)
+  })
+})
+
 new Vue({
   router,
   store,

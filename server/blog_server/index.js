@@ -57,13 +57,6 @@
 
     const router = new Router();//路由
 
-    // 获取文章
-    router.get('/readarticle/:name', async ctx => {
-        let name = ctx.params.name
-        // console.log(name);
-        ctx.type = 'md';
-        ctx.body = fs.createReadStream(`./static/${name}`);
-    });
 
     const articlerouter = require('./blog.js')
     const userrouter = require('./userrouter.js')
