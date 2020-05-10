@@ -12,7 +12,7 @@ articlerouters.get('/getArticles', async function (ctx) {
     const connection = await Mysql.createConnection(mysql_nico)
     // const sql = `select * from article order by id desc`
     const sql = `select * from article a,sort b,label c
-                where a.sortid =b.sortid and a.labelid =c.labelid order by id desc limit 10`
+                where a.sortid =b.sortid and a.labelid =c.labelid order by id desc limit 7`
     const [rs] = await connection.query(sql);
 
     connection.end(function(err){

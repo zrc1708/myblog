@@ -23,6 +23,7 @@ export default {
             if (data.code !== 200) return this.$message('登录后方可使用此功能')
             // console.log(data);
             this.labelList = data.arr
+            this.$store.commit('setlabelNum',this.labelList.length)
         },
         readlist(name){
             this.$store.commit('setName',name)

@@ -3,7 +3,7 @@
         <div class="header">
             <a href="http://www.jibei66.com">
                 <img src="../assets/nico.png" alt="">
-                <span>jibei·极北</span>
+                <span><span class="hide">jibei·</span>极北</span>
             </a>
             <ul>
                 <li @click="move('/articlelist')">主页</li>
@@ -95,6 +95,26 @@ export default {
                     }
                 }
         }
+        }
+    }
+    @media(max-width:465px){
+        #app{
+            .header{
+                ul{
+                    li{
+                        margin: 20px 10px;
+                    }
+                }
+            }
+        }
+    }
+    @media(max-width:433px){
+        #app{
+            .header{
+                .hide{
+                    display: none;
+                }
+            }
         }
     }
 </style>

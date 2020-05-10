@@ -26,7 +26,8 @@ export default {
     },
     methods: {
         readArticle(){
-            this.$store.commit('setArticleId',this.article.id)
+            let id = this.article.id+'?'+Math.random()
+            this.$store.commit('setArticleId',id)
         },
         readLabel(name){
             this.$store.commit('setName',name)
@@ -87,5 +88,18 @@ export default {
             font-size: 16px;
         }
     }
-    
+    @media(max-width:433px){
+    #app{
+        margin-bottom: 5px;
+        .article{
+            font-size: 20px;
+        }
+        ul{
+            li{
+                font-size: 13px;
+                margin: 0 10px;
+            }
+        }
+    }
+  }
 </style>

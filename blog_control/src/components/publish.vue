@@ -81,12 +81,14 @@ export default {
         },
         mymd(){
             let converter = new showdown.Converter();
-            return converter.makeHtml(this.uploadArticle.content);
+            let md = this.uploadArticle.content.replace(/\'/g, "\"")
+            return converter.makeHtml(md);
         }
     },
     methods: {
         // 发表文章
         async upload() {
+            this.uploadArticle.content = this.uploadArticle.content.replace(/\'/g, "\"")
             const {data} = await this.$http.post(`publisharticle`,this.uploadArticle)
             console.log(data)
             if (data.code !== 200) return this.$message('登录失效')

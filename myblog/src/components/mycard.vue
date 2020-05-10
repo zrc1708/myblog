@@ -17,8 +17,8 @@
             <a href="https://github.com/zrc1708" target="_blank">GitHub</a>
         </div>
         <div class="row3">
-            <div><span>79</span><span>文章</span></div>
-            <div><span>43</span><span>标签</span></div>
+            <div><span>{{$store.state.articleNum}}</span><span>文章</span></div>
+            <div><span>{{$store.state.labelNum}}</span><span>标签</span></div>
         </div>
     </div>
 </template>
@@ -33,14 +33,14 @@ export default {
 <style lang="less" scoped>
     #app{
         width: 100%;
-        height: 380px;
+        height: 100%;
         background-color: white;
         border-radius: 10px;
         box-shadow:0px 2px 15px 4px #eeeeee;
         display: flex;
         flex-direction: column;
-        padding-top: 35px;
-        font: #565a5f;
+        padding-top: 20px;
+        color: #565a5f;
         .row1{
             display: flex;
             div:nth-child(1){
@@ -119,6 +119,7 @@ export default {
                 align-content: center;
                 justify-content: center;
                 border-top: 1px solid #eeeeee;
+                padding-bottom: 10px;
                 span:nth-child(1){
                     font-size: 30px;
                     display: block;
@@ -135,5 +136,95 @@ export default {
             }
         }
     }
-    
+    @media(max-width:945px){
+        #app{
+            padding: 10px 0;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+            .row1{
+                flex: 1;
+                justify-content: center;
+                align-content: center;
+            }
+            .row2{
+                flex: 1;
+                span:nth-child(1){
+                    padding-top: 10px;
+                }
+                span:nth-child(3){
+                    padding-bottom: 0;
+                }
+                a{
+                    display: none;
+                }
+            }
+            .row3{
+                flex: 1;
+                margin-top: 8px;
+                div{
+                    border-top: 0;
+                }
+                div:nth-child(2){
+                    border-left: 0;
+                }
+            }
+
+        }
+    }
+    @media(max-width:720px){
+        #app{
+            .row1{
+                display: none;
+                margin-top: -5px;
+            }
+            .row2{
+                margin-top: -5px;
+                span:nth-child(1){
+                    padding-top: 0;
+                }
+                span:nth-child(2){
+                    display: none;
+                }
+            }
+            .row3{
+                margin-top: 6px;
+            }
+        }
+    }
+    @media(max-width:433px){
+        #app{
+            padding-top: 0;
+            .row2{
+                line-height: 60px;
+                display: flex;
+                span{
+                    width: 50%;
+                    margin: 0;
+                }
+                span:nth-child(1){
+                    font-size: 25px;
+                    font-weight: normal;
+                }
+                span:nth-child(3){
+                    font-size: 14px;
+                    transform: translateY(4px);
+                }
+            }
+            .row3{
+                line-height: 60px;
+                margin-top: 0;
+                div{
+                    flex-direction: row;
+                    padding-bottom: 0;
+                    span:nth-child(1){
+                        font-size: 14px;
+                    }
+                    span:nth-child(2){
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
 </style>

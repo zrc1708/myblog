@@ -23,6 +23,7 @@ export default {
                 return
             }
             this.articleList = data.arr
+            this.$store.commit('setArticleNum',this.articleList.length)
         }
     },
     components:{
