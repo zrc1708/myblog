@@ -459,4 +459,23 @@ articlerouters.post('/updateArticles', async function (ctx) {
     };
 });
 
+// 搜索文章
+articlerouters.post('/searchArticles', async function (ctx) {
+    const title = ctx.request.body.title
+
+    const connection = await Mysql.createConnection(mysql_nico)
+    const sql = `SELECT * from article a,sort b,label c
+    where a.sortid =b.sortid and a.labelid =c.labelid and a.title LIKE '%${title}%' order by id desc;`
+    const [rs] = await connection.query(sql);
+
+    connection.end(function(err){
+        //连接结束
+    })
+
+    return ctx.body = {
+        arr:rs,
+        code:200,
+    };
+});
+
 module.exports = articlerouters

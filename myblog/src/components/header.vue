@@ -12,11 +12,18 @@
                 <!--清除浮动样式-->
                 <div style="clear:both;"></div>
             </ul>
+            <input type="text" class="search" v-model="searchdata" placeholder="搜索">
+            <img src="../assets/搜索.png" alt="" class="searchicon" @click="search">
         </div>
     </div>
 </template>
 <script>
 export default {
+    data () {
+        return {
+            searchdata:''      
+        }
+    },
     methods: {
         move(url){
             let data=window.location.href;
@@ -30,6 +37,10 @@ export default {
             this.$router.push({
                 path:url,
             })
+        },
+        search(){
+            this.$router.push(`/search?searchtitle=${this.searchdata}`)
+            this.searchdata = ''
         }
     },
 }
@@ -54,6 +65,7 @@ export default {
             width: 100%;
             max-width: 1770px;
             display: flex;
+            position: relative;
             a{
                 display: block;
                 text-decoration: none;
@@ -94,7 +106,62 @@ export default {
                         background-color: #38b7ea;
                     }
                 }
+            }
+            .search{
+                box-sizing: border-box;
+	            outline: none;
+                height: 35px;
+                border-radius: 20px;
+                border: 1px solid #a9b4c2;
+                padding-left: 10px;
+                background-color: white;
+                width: 300px;
+                margin-top: 13px;
+                font-size: 16px;
+                margin-left: auto;
+            }
+            .searchicon{
+                width: 30px;
+                height: 30px;
+                position: absolute;
+                z-index: 2;
+                right: 7px;
+                top: 16px;
+                cursor: pointer;
+            }
         }
+    }
+    @media(max-width:945px){
+        #app{
+            .header{
+                .search{
+                    margin-right: 7%;
+                }
+                .searchicon{
+                    right: 8%;
+                }
+            }
+        }
+    }
+    @media(max-width:789px){
+        #app{
+            .header{
+                .search{
+                    width: 200px;
+                }
+            }
+        }
+    }
+    @media(max-width:682px){
+        #app{
+            .header{
+                .search{
+                    display: none;
+                }
+                .searchicon{
+                    display: none;
+                }
+            }
         }
     }
     @media(max-width:465px){
