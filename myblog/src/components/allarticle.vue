@@ -53,7 +53,7 @@ export default {
             // 当前的页码
             curPage:1,
             // 一页展示的记录数
-            pageSize:10,
+            pageSize:7,
             pageflag:true
         }
     },

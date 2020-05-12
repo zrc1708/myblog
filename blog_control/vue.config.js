@@ -7,10 +7,7 @@ module.exports = {
             vue: 'Vue',
             'vue-router': 'VueRouter',
             'vuex': 'Vuex',
-            // axios: 'axios',
-            'element-ui': 'ELEMENT',
-            // echarts: 'echarts',
-            // nprogress: 'NProgress',
+            'element-ui': 'ELEMENT'
         })
     },
     publicPath: './',  //输出的根路径  默认是/ 如果你的网站是app.com/vue 这更改此配置项

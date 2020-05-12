@@ -23,6 +23,8 @@
     </div>
     <!-- github快捷按钮 -->
     <my-github></my-github>
+    <!-- 底部备案信息 -->
+    <my-foot></my-foot>
   </div>
 </template>
 <script>
@@ -32,6 +34,7 @@ import myarticle from '../src/components/article.vue'
 import blackboard from '../src/components/blackboard.vue'
 import mycloud from '../src/components/cloud.vue'
 import github from '../src/components/github.vue'
+import foot from '../src/components/foot.vue'
 
 export default {
   components:{
@@ -40,7 +43,8 @@ export default {
     'my-article':myarticle,
     'my-blackboard':blackboard,
     'my-mycloud':mycloud,
-    'my-github':github
+    'my-github':github,
+    'my-foot':foot
   },
   watch:{
     '$store.state.articleId':function(newFlag, oldFlag){
