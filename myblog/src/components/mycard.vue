@@ -1,10 +1,10 @@
 <template>
     <div id="app" ref="app">
         <div class="row1">
-            <div>
+            <div class="imgbox">
                 <img src="../assets/jibei.jpg" alt="">
             </div>
-            <div>
+            <div class="introduce">
                 <span>热情的学习者</span>
                 <span>普通的开发者</span>
                 <span>贫穷的数码迷</span>
@@ -37,19 +37,18 @@ export default {
         background-color: white;
         border-radius: 10px;
         box-shadow:0px 2px 15px 4px #eeeeee;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: 100px 170px 1fr;
         padding-top: 20px;
         color: #565a5f;
         .row1{
             display: flex;
-            div:nth-child(1){
+            height: 100px;
+            .imgbox{
                 flex: 1;
-                display: flex;
-                align-content: center;
-                justify-content: center;
+                height: 100px;
+                text-align: center;
                 img{
-                    display: block;
                     width: 100px;
                     height: 100px;
                     object-fit: cover;
@@ -57,7 +56,8 @@ export default {
                     box-shadow:0px 2px 6px 4px #f5f5f5;
                 }
             }
-            div:nth-child(2){
+            .introduce{
+                height: 100px;
                 flex: 1;
                 display: flex;
                 flex-direction: column;
@@ -110,7 +110,6 @@ export default {
         }
         .row3{
             display: flex;
-            height: 100%;
             margin-top: 20px;
             div{
                 flex: 1;
