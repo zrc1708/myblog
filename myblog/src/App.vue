@@ -52,7 +52,15 @@ export default {
       this.$router.push({
         path:`/readarticle?articleid=${id}`,
       })
-    }
+    },
+    '$store.state.name':async function(newFlag, oldFlag){
+        let name = this.$store.state.name
+        let category = this.$store.state.category
+        console.log(name,category)
+        this.$router.push({
+          path:`/clarticle?category=${category}&name=${name}`,
+        })
+    },
   }
 }
 </script>

@@ -2,9 +2,9 @@
     <div id="app">
        <div class="article" @click="readArticle">{{article.title}}</div>
        <ul>
-            <li><i class="fa fa-calendar"></i>{{article.date.split('T')[0]}}</li>
-            <li @click="readSort(article.sortname)"><i class="fa fa-folder"></i>{{article.sortname}}</li>
-            <li @click="readLabel(article.labelname)"><i class="fa fa-tag"></i>{{article.labelname}}</li>
+            <li><i></i>{{article.date.split('T')[0]}}</li>
+            <li @click="readSort(article.sortname)"><i></i>{{article.sortname}}</li>
+            <li @click="readLabel(article.labelname)"><i></i>{{article.labelname}}</li>
             <!--清除浮动样式-->
             <div style="clear:both;"></div>
        </ul>
@@ -65,7 +65,7 @@ export default {
                 i{
                     margin-right: 10px;
                 }
-                line-height: 25px;
+                line-height: 20px;
                 margin: 10px;
                 float: left;
                 list-style: none;
@@ -73,6 +73,43 @@ export default {
                 &:nth-child(1){
                     margin-left: 0;
                     cursor: default;
+                    i{
+                        transform: translateY(-2px);
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        background: url(../assets/icons.png) no-repeat;
+                        background-size: cover;
+                        background-position: -16px 0;
+                        margin-right: 5px;
+                        vertical-align: middle;
+                    }
+                }
+                &:nth-child(2){
+                    i{
+                        transform: translateY(-2px);
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        background: url(../assets/icons.png) no-repeat;
+                        background-size: cover;
+                        background-position: -32px 0;
+                        margin-right: 5px;
+                        vertical-align: middle;
+                    }
+                }
+                &:nth-child(3){
+                    i{
+                        transform: translateY(-2px);
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        background: url(../assets/icons.png) no-repeat;
+                        background-size: cover;
+                        background-position: -48px 0;
+                        margin-right: 5px;
+                        vertical-align: middle;
+                    }
                 }
                 &:nth-child(2),
                 &:nth-child(3){

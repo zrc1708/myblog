@@ -69,7 +69,7 @@ export default {
         async getArticleList(pageSize,curPage){
             let {data} = await this.$http.get(`getPagingArticles/${pageSize}/${curPage}`)
             if(data.code!==200){
-                console.log(获取失败);
+                console.log('获取失败');
                 return
             }
             this.articleList = data.arr
@@ -112,14 +112,6 @@ export default {
         'my-article':myarticle
     },
      watch:{
-    '$store.state.name':async function(newFlag, oldFlag){
-        let name = this.$store.state.name
-        let category = this.$store.state.category
-        let {data} = await this.$http.get(`getlist/${category}/${name}`)
-        // console.log(data);
-        this.articleList = data.arr
-        this.pageflag = false
-    },
     '$store.state.getarticle':async function(newFlag, oldFlag){
         this.getArticleList(this.pageSize,this.curPage)
         this.pageflag = true

@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 
 import '../src/assets/css/global.css'
+// import '../src/assets/css/font-awesome.min.css'
 
 import axios from 'axios'
 axios.defaults.baseURL = 'http://www.jibei66.com:8686/'

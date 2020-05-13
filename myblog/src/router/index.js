@@ -6,6 +6,7 @@ import readarticle from '../components/readArticle.vue'
 import allarticle from '../components/allarticle.vue'
 import me from '../components/me.vue'
 import search from '../components/search.vue'
+import clarticle from '../components/classarticle.vue'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,8 @@ Vue.use(VueRouter)
     {path:'/readarticle',component:readarticle},
     {path:'/allarticle',component:allarticle},
     {path:'/me',component:me},
-    {path:'/search',component:search}
+    {path:'/search',component:search},
+    {path:'/clarticle',component:clarticle}
   ]
 
 const router = new VueRouter({

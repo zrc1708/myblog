@@ -13,27 +13,25 @@ export default {
         }
     },
     created() {
-        this.getArticleList()
+        let url=window.location.href;
+        let data = url.split('?')[1]
+        let category = data.split("&")[0].split("=")[1];
+        let name = data.split("&")[1].split("=")[1];
+        this.getarticle(category,name)
     },
     methods: {
-        async getArticleList(){
-            let {data} = await this.$http.get(`getArticles`)
+        async getarticle(category,name){
+            let {data} = await this.$http.get(`getlist/${category}/${name}`)
             if(data.code!==200){
-                console.log(获取失败);
+                console.log('获取失败');
                 return
             }
             this.articleList = data.arr
-            this.$store.commit('setArticleNum',this.articleList.length)
         }
     },
     components:{
         'my-article':myarticle
     },
-     watch:{
-    '$store.state.getarticle':async function(newFlag, oldFlag){
-        this.getArticleList()
-    }
-  }
 }
 </script>
 <style lang="less" scoped>

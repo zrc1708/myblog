@@ -13,7 +13,7 @@
         <div class="row2">
             <span>极北</span>
             <span>Coder & Developer</span>
-            <span><i class="fa fa-map-marker"></i>江苏·南京</span>
+            <span><i></i>江苏·南京</span>
             <a href="https://github.com/zrc1708" target="_blank">GitHub</a>
         </div>
         <div class="row3">
@@ -63,6 +63,8 @@ export default {
                 flex-direction: column;
                 align-content: center;
                 justify-content: center;
+                padding-left: 5px;
+                box-sizing: border-box;
                 span{
                     display: block;
                     color: #808080ad;
@@ -84,7 +86,14 @@ export default {
             }
             span:nth-child(3){
                 i{
+                    display: inline-block;
+                    width: 18px;
+                    height: 18px;
+                    background: url(../assets/icons.png) no-repeat;
+                    background-size: cover;
+                    background-position: 1px 0;
                     margin-right: 5px;
+                    transform: translateY(4px);
                 }
                 color: #9a9ea3;
                 padding-bottom: 20px;
@@ -137,6 +146,7 @@ export default {
     }
     @media(max-width:945px){
         #app{
+            display: flex;
             padding: 10px 0;
             flex-direction: row;
             justify-content: center;
