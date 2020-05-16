@@ -18,7 +18,7 @@
 
       <div class="sidebar">
         <my-blackboard></my-blackboard>
-        <my-mycloud></my-mycloud>
+        <my-mycloud @clickcloud="gotoclass" :datalist="labelList"></my-mycloud>
       </div>
     </div>
     <!-- github快捷按钮 -->
@@ -46,21 +46,40 @@ export default {
     'my-github':github,
     'my-foot':foot
   },
+  data() {
+    return {
+        labelList:[]
+    }
+  },
+  created() {
+        this.getLabels()
+  },
+  methods: {
+    // cloud子组件点击事件，返回值为被点击的元素名称
+    gotoclass(name){
+      let data=window.location.href;
+      let oldname = decodeURIComponent(data.split("&name=")[1]);
+      if(oldname===name) return
+      this.$router.push({
+          path:`/clarticle?category=label&name=${name}`,
+      })
+    },
+    // 获取标签列表，传递给cloud子组件
+    async getLabels(){
+      const {data} = await this.$http.get(`getLabelCloud`)
+      if (data.code !== 200) return this.$message('登录后方可使用此功能')
+      // console.log(data);
+      this.labelList = data.arr
+      this.$store.commit('setlabelNum',this.labelList.length)
+    },
+  },
   watch:{
     '$store.state.articleId':function(newFlag, oldFlag){
       let id = this.$store.state.articleId.split('?')[0]
       this.$router.push({
         path:`/readarticle?articleid=${id}`,
       })
-    },
-    '$store.state.name':async function(newFlag, oldFlag){
-        let name = this.$store.state.name
-        let category = this.$store.state.category
-        console.log(name,category)
-        this.$router.push({
-          path:`/clarticle?category=${category}&name=${name}`,
-        })
-    },
+    }
   }
 }
 </script>

@@ -6,8 +6,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     articleId:'',
-    category:'',
-    name:'',
     getarticle:0,
     articleNum:0,
     labelNum:0
@@ -15,12 +13,6 @@ export default new Vuex.Store({
   mutations: {
     setArticleId(state,val){
       state.articleId = val
-    },
-    setCategory(state,val){
-      state.category = val
-    },
-    setName(state,val){
-      state.name = val
     },
     setArticleList(state){
       state.getarticle++

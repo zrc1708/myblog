@@ -29,6 +29,15 @@ export default {
             this.articleList = data.arr
         }
     },
+    watch:{
+        $route(to,from){
+            let url = to.fullPath
+            let data = url.split('?')[1]
+            let category = decodeURIComponent(data.split("&")[0].split("=")[1]);
+            let name = decodeURIComponent(data.split("&")[1].split("=")[1]);
+            this.getarticle(category,name)
+        }
+    },
     components:{
         'my-article':myarticle
     },

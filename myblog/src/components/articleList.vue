@@ -29,7 +29,7 @@ export default {
     components:{
         'my-article':myarticle
     },
-     watch:{
+    watch:{
     '$store.state.getarticle':async function(newFlag, oldFlag){
         this.getArticleList()
     }

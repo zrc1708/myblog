@@ -1,34 +1,23 @@
 <template>
     <div id="app">
         <span class="title">标签云</span>
-        <span class="cloud" v-for="(item, index) in labelList" 
+        <span class="cloud" v-for="(item, index) in datalist" 
         :key="index" :style="{fontSize: (item.count-1)*3 + 16 + 'px'}"
-        @click="readlist(item.labelname)"    >{{item.labelname}}</span>
+        @click="readlist(item.labelname)">{{item.labelname}}</span>
     </div>
 </template>
 <script>
 export default {
+    props: ['datalist'],
     data() {
         return {
             labelList:[]
         }
     },
-    created() {
-        this.getLabels()
-    },
     methods: {
-        // 获取标签列表
-        async getLabels(){
-            const {data} = await this.$http.get(`getLabelCloud`)
-            if (data.code !== 200) return this.$message('登录后方可使用此功能')
-            // console.log(data);
-            this.labelList = data.arr
-            this.$store.commit('setlabelNum',this.labelList.length)
-        },
         readlist(name){
-            this.$store.commit('setName',name)
-            this.$store.commit('setCategory','label')
-        }
+            this.$emit('clickcloud',name); 
+        },
     },
 }
 </script>

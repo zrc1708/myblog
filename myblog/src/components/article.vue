@@ -3,8 +3,8 @@
        <div class="article" @click="readArticle">{{article.title}}</div>
        <ul>
             <li><i></i>{{article.date.split('T')[0]}}</li>
-            <li @click="readSort(article.sortname)"><i></i>{{article.sortname}}</li>
-            <li @click="readLabel(article.labelname)"><i></i>{{article.labelname}}</li>
+            <li @click="read('sort',article.sortname)"><i></i>{{article.sortname}}</li>
+            <li @click="read('label',article.labelname)"><i></i>{{article.labelname}}</li>
             <!--清除浮动样式-->
             <div style="clear:both;"></div>
        </ul>
@@ -16,26 +16,18 @@
 <script>
 export default {
     props: ['article'],
-    data() {
-        return {
-            
-        }
-    },
-    mounted() {
-        // console.log(this.article);
-    },
     methods: {
         readArticle(){
             let id = this.article.id+'?'+Math.random()
             this.$store.commit('setArticleId',id)
         },
-        readLabel(name){
-            this.$store.commit('setName',name)
-            this.$store.commit('setCategory','label')
-        },
-        readSort(name){
-            this.$store.commit('setName',name)
-            this.$store.commit('setCategory','sort')
+        read(category,name){
+            let data=window.location.href;
+            let oldname = decodeURIComponent(data.split("?")[1]);
+            if(oldname===`category=${category}&name=${name}`) return
+            this.$router.push({
+                path:`/clarticle?category=${category}&name=${name}`,
+            })
         }
     },
 }
