@@ -29,9 +29,10 @@
             ctx.request.url!=='/addSort'&&
             ctx.request.url!=='/addLabel'&&
             ctx.request.url!=='/uploadfile'&&
-            ctx.request.url!=='/deleteLabel') {
+            ctx.request.url!=='/deleteLabel'&&
+            ctx.request.url!=='/getuser') {
             return await next();
-        }else if(token === 'null'){
+        }else if(!token){
             return ctx.body={
                 code:'444',
                 message:"该功能只有登录用户可以使用",
