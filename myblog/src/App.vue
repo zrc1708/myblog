@@ -52,7 +52,8 @@ export default {
     }
   },
   created() {
-        this.getLabels()
+        this.getLabels(),
+        this.getArticlesCount()
   },
   methods: {
     // cloud子组件点击事件，返回值为被点击的元素名称
@@ -71,6 +72,13 @@ export default {
       // console.log(data);
       this.labelList = data.arr
       this.$store.commit('setlabelNum',this.labelList.length)
+    },
+    // 获取文章数量
+    async getArticlesCount(){
+      const {data} = await this.$http.get(`getArticlesCount`)
+      if (data.code !== 200) return this.$message('登录后方可使用此功能')
+      let count = data.arr[0]['count(*)']
+      this.$store.commit('setArticleNum',count)
     },
   },
   watch:{
