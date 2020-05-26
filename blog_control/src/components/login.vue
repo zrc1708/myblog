@@ -20,16 +20,16 @@ export default {
             }
         }
     },
-    created:function(){
-        // 添加键盘回车事件
-        let that = this;
-        document.onkeydown = function (e) {
-            let key = window.event.keyCode;
-            if (key === 13){
-            that.login()
-        }
-      }
-    },
+    // created:function(){
+    //     // 添加键盘回车事件
+    //     let that = this;
+    //     document.onkeydown = function (e) {
+    //         let key = window.event.keyCode;
+    //         if (key === 13){
+    //         that.login()
+    //     }
+    //   }
+    // },
     methods: {
         // 登录
       async login(){
