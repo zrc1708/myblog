@@ -8,7 +8,7 @@
         <my-card ></my-card>
         <div class="showbar">
           <my-blackboard></my-blackboard>
-          <my-mycloud></my-mycloud>
+          <my-mycloud @clickcloud="gotoclass" :datalist="labelList"></my-mycloud>
         </div>
       </div>
 
