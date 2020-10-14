@@ -103,7 +103,7 @@ export default {
         .leftbar{
           padding-left: 20px;
           padding-bottom: 20px;
-          height: 400px;
+          height: 420px;
           flex: 2;
           .showbar{
             padding-top: 20px;
@@ -115,6 +115,7 @@ export default {
           flex-direction: column;
           padding: 0 20px;
           flex: 6;
+          width: 0;
         }
         .sidebar{
           padding-right: 20px;

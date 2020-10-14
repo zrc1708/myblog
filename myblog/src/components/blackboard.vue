@@ -2,10 +2,9 @@
     <div id="app">
         <span class="title">小黑板</span>
        我只想写点务实，能看懂，读者可复现的原创文章。<br>
-       穷苦大学生，目前大三。<br>
-       <span class="url">其他链接：</span>
-       <a href="http://pan.jibei66.com/#/welcome" target="_blank">妮可云盘</a>
-       <a href="http://tenno.jibei66.com/" target="_blank">仓鼠导航</a>
+       穷苦大学生，目前大四。<br>
+       <span class="url">个人主页：</span>
+       <a href="http://www.jibei66.com/" target="_blank">极北的个人空间</a>
     </div>
 </template>
 <script>

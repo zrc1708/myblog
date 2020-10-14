@@ -6,3 +6,11 @@ body{
     background-color: #f5f8f9;
     font: menu;
 }
+:root {
+    box-sizing: border-box;
+}
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}

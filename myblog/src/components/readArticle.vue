@@ -32,6 +32,8 @@ export default {
 @import "../assets/css/md.css";
     #app{
         width: 100%;
+        min-width: 100%;
+        max-width: 100%;
         background-color: white;
         border-radius: 10px;
         box-sizing: border-box;
