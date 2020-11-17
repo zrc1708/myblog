@@ -12,7 +12,7 @@
                 <!--清除浮动样式-->
                 <div style="clear:both;"></div>
             </ul>
-            <input type="text" class="search" v-model="searchdata" placeholder="搜索">
+            <input type="text" class="search" v-model="searchdata" @keydown.enter="search" placeholder="搜索">
             <img src="../assets/搜索.png" alt="" class="searchicon" @click="search">
         </div>
     </div>
@@ -39,6 +39,10 @@ export default {
             })
         },
         search(){
+            if(this.$route.query.searchtitle==this.searchdata){
+                this.searchdata = ''
+                return
+            }
             this.$router.push(`/search?searchtitle=${this.searchdata}`)
             this.searchdata = ''
         }
@@ -61,6 +65,7 @@ export default {
         align-content: center;
         box-shadow:0px 2px 15px 4px #eeeeee;
         background-color: white;
+        padding: 0 20px;
         .header{
             width: 100%;
             max-width: 1770px;
@@ -164,12 +169,12 @@ export default {
             }
         }
     }
-    @media(max-width:465px){
+    @media(max-width:496px){
         #app{
             .header{
                 ul{
                     li{
-                        margin: 20px 10px;
+                        margin: 20px 8px;
                     }
                 }
             }

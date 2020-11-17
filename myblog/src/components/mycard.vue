@@ -63,9 +63,9 @@ export default {
                 flex-direction: column;
                 align-content: center;
                 justify-content: center;
-                padding-left: 5px;
                 box-sizing: border-box;
                 span{
+                    text-align: center;
                     display: block;
                     color: #808080ad;
                     font-size: 13px;
@@ -146,8 +146,8 @@ export default {
     }
     @media(max-width:945px){
         #app{
+            padding-top: 10px;
             display: flex;
-            padding: 10px 0;
             flex-direction: row;
             justify-content: center;
             align-content: center;
@@ -155,11 +155,17 @@ export default {
                 flex: 1;
                 justify-content: center;
                 align-content: center;
+                .imgbox{
+                    img{
+                        width: 90px;
+                        height: 90px;
+                    }
+                }
             }
             .row2{
                 flex: 1;
                 span:nth-child(1){
-                    padding-top: 10px;
+                    padding-top: 0;
                 }
                 span:nth-child(3){
                     padding-bottom: 0;

@@ -151,6 +151,9 @@ export default {
         .sidebar{
           display: none;
         }
+        .content_article{
+          width: 100%;
+        }
       }
     }
   }
@@ -158,7 +161,7 @@ export default {
     #app{
       .content{
         .leftbar{
-          height: 80px;
+          display: none;
         }
       }
     }
@@ -168,10 +171,7 @@ export default {
       .content{
         padding-top: 5px;
         .leftbar{
-          height: 50px;
-          padding-bottom: 5px;
-          padding-left: 5px;
-          padding-right: 5px;
+          display: none;
         }
         .content_article{
           padding-left: 5px;

@@ -38,7 +38,6 @@ export default {
         background-color: white;
         border-radius: 10px;
         box-shadow:0px 2px 6px 4px #f5f5f5;
-        // margin-left: 20px;
         margin-bottom: 20px;
         padding: 15px;
         color: #565a5f;

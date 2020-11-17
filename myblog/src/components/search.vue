@@ -24,13 +24,25 @@ export default {
     methods: {
         // 模糊查询
         async searchArticle(title){
+            this.articleList = []
             let {data} = await this.$http.post(`searchArticles`,{title})
             if(data.code!==200){
                 this.$http.message('查询失败')
                 return
             }
-            if(data.arr.length===0) return this.noarticle = true
-            this.articleList = data.arr
+            if(data.arr.length===0){
+                return this.noarticle = true
+            }else{
+                this.noarticle = false
+                this.articleList = data.arr
+            }
+        }
+    },
+    watch:{
+        $route(to,from){
+            if(to.query.searchtitle!=from.query.searchtitle){
+                this.searchArticle(to.query.searchtitle)
+            }
         }
     },
     components:{
